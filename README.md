@@ -95,3 +95,5 @@ spec:
     ]
     }'
 ```
+
+More advanced configurations can be found [here](https://www.cni.dev/plugins/current/)
