@@ -1,0 +1,34 @@
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"ClusterClass"})
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: ClusterClass
+metadata:
+  name: tkg-vsphere-default-v1.1.1-extended
+spec:
+  variables:
+  - name: secondNIC
+    required: false
+    schema:
+      openAPIV3Schema:
+        type: string
+  patches:
+  - name: secondNIC
+    enabledIf: '{{ not (empty .secondNIC) }}'
+    definitions:
+      - selector:
+          apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+          kind: VSphereMachineTemplate
+          matchResources:
+            machineDeploymentClass:
+              names:
+                - tkg-worker
+        jsonPatches:
+          - op: add
+            path: /spec/template/spec/network/devices
+            value:
+            - dhcp4: true
+              networkName: /vc01/network/newport
+            - dhcp4: true
+              networkName: /vc01/network/user-workload
