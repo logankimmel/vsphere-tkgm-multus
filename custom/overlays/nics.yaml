@@ -5,17 +5,10 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: ClusterClass
 metadata:
-  name: tkg-vsphere-default-v1.1.1-extended
+  name: tkg-vsphere-default-v1.2.0-extended
 spec:
-  variables:
-  - name: secondNIC
-    required: false
-    schema:
-      openAPIV3Schema:
-        type: string
   patches:
   - name: secondNIC
-    enabledIf: '{{ not (empty .secondNIC) }}'
     definitions:
       - selector:
           apiVersion: infrastructure.cluster.x-k8s.io/v1beta1

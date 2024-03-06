@@ -1,7 +1,7 @@
 # Using Multus with 2NIC worker nodes on TKGm/vSphere
 
 ## Pre-reqs
-* TKGm management cluster is created (tested with 2.4)
+* TKGm management cluster is created (tested with 2.5)
 * vSphere with multiple networks (this example uses the networks: `user-workload` and `newport` )
 * [ytt installed](https://carvel.dev/ytt/docs/v0.48.0/install/)
 * kubectl installed and set to management cluster context
