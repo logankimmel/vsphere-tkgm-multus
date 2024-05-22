@@ -1,0 +1,6 @@
+.vscode
+custom_cc.yaml
+custom_cluster.yaml
+default_cluster.yaml
+tkg-vsphere-default-v1.2.0.yaml
+wl.yaml

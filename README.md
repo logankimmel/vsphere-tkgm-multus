@@ -13,7 +13,7 @@ This process involves creating a custom cluster class that allows for deploying 
 1. In Tanzu Kubernetes Grid 2.3.0 and later, after you deploy a management cluster, you can find the default ClusterClass manifest in the ~/.config/tanzu/tkg/clusterclassconfigs folder.
 
 ```bash
-cp ~/.config/tanzu/tkg/clusterclassconfigs/tkg-vsphere-default-v1.1.1.yaml .
+cp ~/.config/tanzu/tkg/clusterclassconfigs/tkg-vsphere-default-v1.2.0.yaml .
 ```
 
 2. To customize your ClusterClass manifest, you create ytt overlay files alongside the manifest. Create a `custom` folder with the following files (example included in this repo)
@@ -26,14 +26,9 @@ custom
 ```
 Take note of the `nics.yaml` file that defines the network device patch I'm applying to the `VSphereMachineTemplate` resource
 
-Use the default ClusterClass manifest to generate the base ClusterClass:
+Use the default ClusterClass manifest to generate the custom clusterClass
 ```bash
-ytt -f tkg-vsphere-default-v1.1.1.yaml -f custom/overlays/filter.yaml > default_cc.yaml
-```
-
-Generate the custom ClusterClass:
-```bash
-ytt -f tkg-vsphere-default-v1.1.1.yaml -f custom/ > custom_cc.yaml
+ytt -f tkg-vsphere-default-v1.2.0.yaml -f custom/ > custom_cc.yaml
 ```
 
 Install the custom clusterClass in the Management cluster:

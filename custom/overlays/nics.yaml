@@ -7,8 +7,19 @@ kind: ClusterClass
 metadata:
   name: tkg-vsphere-default-v1.2.0-extended
 spec:
+  #@overlay/match missing_ok=True
+  variables:
+  #@overlay/append
+  - name: secondNIC
+    required: false
+    schema:
+      openAPIV3Schema:
+        type: string
+        description: "Name of the second network interface device"
+  #@overlay/match expects=1
   patches:
   - name: secondNIC
+    enabledIf: '{{ not (empty .secondNIC) }}'
     definitions:
       - selector:
           apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
@@ -19,9 +30,6 @@ spec:
                 - tkg-worker
         jsonPatches:
           - op: add
-            path: /spec/template/spec/network/devices
-            value:
-            - dhcp4: true
-              networkName: /vc01/network/newport
-            - dhcp4: true
-              networkName: /vc01/network/user-workload
+            path: /spec/template/spec/network/devices/-
+            valueFrom:
+              template: '{dhcp4: true, networkName: /vc01/network/{{ .secondNIC }} }'

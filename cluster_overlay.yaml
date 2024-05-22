@@ -6,7 +6,7 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 spec:
   topology:
-    class: tkg-vsphere-default-v1.1.1-extended
+    class: tkg-vsphere-default-v1.2.0-extended
     variables:
-    - name: secondNIC
-      value: "true"
+      - name: secondNIC
+        value: "speedy-net"
