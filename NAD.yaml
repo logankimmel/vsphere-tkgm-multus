@@ -9,10 +9,11 @@ spec:
     "plugins": [
     {
     "type": "macvlan",
-    "master": "eth0",
+    "master": "eth1",
     "mode": "bridge",
-    "ipam": {}
-    }
+    "ipam": {
+      "type": "dhcp"
+    }}
     ]
     }'
  
