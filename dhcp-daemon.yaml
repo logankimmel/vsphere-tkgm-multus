@@ -21,7 +21,7 @@ spec:
       hostNetwork: true
       initContainers:
       - name: sock-cleanup
-        image: harbor.binbytes.io/library/ubuntu:22.04
+        image: harbor.mbentley.net/library/ubuntu:22.04
         command: ["rm", "-f", "/run/cni/dhcp.sock"]
         volumeMounts:
         - name: run
@@ -30,7 +30,7 @@ spec:
       - name: dhcp-daemon
         securityContext:
           privileged: true
-        image: harbor.binbytes.io/library/cni-dhcp-daemon:latest
+        image: harbor.mbentley.net/library/cni-dhcp-daemon:latest
         imagePullPolicy: Always
         args: [""]
         volumeMounts:
